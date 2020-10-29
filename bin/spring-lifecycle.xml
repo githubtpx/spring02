@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="car" class="com.atguigu.spring.lifecycle.Car" init-method="init"  destroy-method="destroy">
+		<property name="brand" value="宝马"></property>
+		<property name="price" value="450000"></property>
+		
+	</bean>   
+	
+	
+	<!-- 配置bean后置处理器 ：Spring能自动识别是一个后置处理器
+		 目 的：首先，告诉Spring的IOC容器，我有这么一个东西，这个东西存在，所以我配置到这个IOC容器里面了。
+		 	   当我们实例化IOC容器对象时，就能读取到这个配置了，我解析到这个class了，我自然而然就能
+		 	   发现，你与我的BeanPostProcessor有关系的。此时IOC容器自然而然认为这个类认为是后置处理器了。
+		 	   自然而然的在每个IOC容器的bean对象的生命周期中作用上去了。
+	-->
+	<bean class="com.atguigu.spring.lifecycle.MyBeanPostProcessor"></bean>
+	
+	
+	
+	
+	
+	
+
+</beans>

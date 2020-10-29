@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+
+	<!-- 直接配置c3p0连接池对象   ComboPooledDataSource  通过set方式DI连接信息 -->
+	<!-- <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/mysql"></property>
+		<property name="user" value="root"></property>
+		<property name="password" value="123123"></property>
+		<property name="initialPoolSize" value="5"></property>
+		<property name="maxPoolSize" value="10"></property>		
+	</bean> -->
+	
+	
+	
+	
+	
+	<!-- 通过引入外部的属性文件配置c3p0数据库连接池对象 -->
+	<!-- 引入外部属性文件 -->
+	<!-- 1   class = Property占位符配置器类
+			 Spring有一个类路径下语法classpath:	从类路径下读取:后的文件
+			 				    classpath*:	从多个类路径下:后读取文件
+	 -->
+	<!-- <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:db.properties"></property>
+	</bean> -->
+	
+	
+	<!-- 2    推荐使用,底层和方式1一样：
+		        读到属性文件时，会把key和value解析出来，并会放到系统内存中，和系统变量username放到一起了，读到了系统用户配置了 
+     -->
+	<context:property-placeholder location="classpath:db.properties"></context:property-placeholder>
+	
+	<!-- 配置c3p0连接池 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" >
+		<property name="driverClass" value="${jdbc.driver}"></property>
+		<property name="jdbcUrl" value="${jdbc.url}"></property>
+		<property name="user" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+	
+	</bean>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+</beans>
